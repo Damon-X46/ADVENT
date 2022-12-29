@@ -19,12 +19,12 @@ from torch import nn
 from torchvision.utils import make_grid
 from tqdm import tqdm
 
-from advent.model.discriminator import get_fc_discriminator
-from advent.utils.func import adjust_learning_rate, adjust_learning_rate_discriminator
-from advent.utils.func import loss_calc, bce_loss
-from advent.utils.loss import entropy_loss
-from advent.utils.func import prob_2_entropy
-from advent.utils.viz_segmask import colorize_mask
+from model.discriminator import get_fc_discriminator
+from utils.func import adjust_learning_rate, adjust_learning_rate_discriminator
+from utils.func import loss_calc, bce_loss
+from utils.loss import entropy_loss
+from utils.func import prob_2_entropy
+from utils.viz_segmask import colorize_mask
 
 
 def train_advent(model, trainloader, targetloader, cfg):

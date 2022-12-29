@@ -22,9 +22,13 @@ class BaseDataset(data.Dataset):
         if max_iters is not None:
             self.img_ids = self.img_ids * int(np.ceil(float(max_iters) / len(self.img_ids)))
         self.files = []
+        aaa = 0
         for name in self.img_ids:
             img_file, label_file = self.get_metadata(name)
             self.files.append((img_file, label_file, name))
+            aaa += 1
+            if aaa == 100:
+                return
 
     def get_metadata(self, name):
         raise NotImplementedError

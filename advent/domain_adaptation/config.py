@@ -11,8 +11,8 @@ import os.path as osp
 import numpy as np
 from easydict import EasyDict
 
-from advent.utils import project_root
-from advent.utils.serialization import yaml_load
+from utils import project_root
+from utils.serialization import yaml_load
 
 
 cfg = EasyDict()
@@ -31,7 +31,7 @@ cfg.DATA_LIST_TARGET = str(project_root / 'advent/dataset/cityscapes_list/{}.txt
 cfg.DATA_DIRECTORY_SOURCE = str(project_root / 'data/GTA5')
 cfg.DATA_DIRECTORY_TARGET = str(project_root / 'data/Cityscapes')
 # Number of object classes
-cfg.NUM_CLASSES = 19
+cfg.NUM_CLASSES = 10
 # Exp dirs
 cfg.EXP_NAME = ''
 cfg.EXP_ROOT = project_root / 'experiments'

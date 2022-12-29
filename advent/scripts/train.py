@@ -5,7 +5,10 @@
 # Written by Tuan-Hung Vu
 # --------------------------------------------------------
 import argparse
-import os
+import os, sys
+base_path = os.path.dirname(os.path.dirname(
+                            os.path.abspath(__file__)))
+sys.path.append(base_path)
 import os.path as osp
 import pprint
 import random
@@ -16,11 +19,11 @@ import yaml
 import torch
 from torch.utils import data
 
-from advent.model.deeplabv2 import get_deeplab_v2
-from advent.dataset.gta5 import GTA5DataSet
-from advent.dataset.cityscapes import CityscapesDataSet
-from advent.domain_adaptation.config import cfg, cfg_from_file
-from advent.domain_adaptation.train_UDA import train_domain_adaptation
+from model.deeplabv2 import get_deeplab_v2
+from dataset.gta5 import GTA5DataSet
+from dataset.cityscapes import CityscapesDataSet
+from domain_adaptation.config import cfg, cfg_from_file
+from domain_adaptation.train_UDA import train_domain_adaptation
 
 warnings.filterwarnings("ignore", message="numpy.dtype size changed")
 warnings.filterwarnings("ignore")
@@ -31,7 +34,9 @@ def get_arguments():
     Parse input arguments
     """
     parser = argparse.ArgumentParser(description="Code for domain adaptation (DA) training")
-    parser.add_argument('--cfg', type=str, default=None,
+    # parser.add_argument('--cfg', type=str, default=None,
+    #                     help='optional config file', )
+    parser.add_argument('--cfg', type=str, default='/emwuser/znr/code/ADVENT/advent/scripts/configs/advent.yml',
                         help='optional config file', )
     parser.add_argument("--random-train", action="store_true",
                         help="not fixing random seed.")
@@ -54,7 +59,8 @@ def main():
     cfg_from_file(args.cfg)
     # auto-generate exp name if not specified
     if cfg.EXP_NAME == '':
-        cfg.EXP_NAME = f'{cfg.SOURCE}2{cfg.TARGET}_{cfg.TRAIN.MODEL}_{cfg.TRAIN.DA_METHOD}'
+        # cfg.EXP_NAME = f'{cfg.SOURCE}2{cfg.TARGET}_{cfg.TRAIN.MODEL}_{cfg.TRAIN.DA_METHOD}'
+        cfg.EXP_NAME = f'hainan2jiangsu_{cfg.TRAIN.MODEL}_{cfg.TRAIN.DA_METHOD}'
 
     if args.exp_suffix:
         cfg.EXP_NAME += f'_{args.exp_suffix}'
